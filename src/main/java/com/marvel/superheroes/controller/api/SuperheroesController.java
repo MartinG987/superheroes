@@ -2,9 +2,12 @@ package com.marvel.superheroes.controller.api;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +33,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/api")
 @SecurityRequirement(name = "Bearer Authentication")
+@Validated
 @Tag(name = "SuperHeroes", description = "Funcionalidad crud de superheroes")
 public class SuperheroesController extends BaseController{
 	
@@ -60,7 +64,7 @@ public class SuperheroesController extends BaseController{
 	
 	@PostMapping("/update")
 	@Traceable
-	public ResponseEntity<Object> update(@RequestBody SuperHeroe superHeroe) {
+	public ResponseEntity<Object> update(@Valid @RequestBody SuperHeroe superHeroe) {
 	   superHeroeService.update(superHeroe);
 	   return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -68,7 +72,7 @@ public class SuperheroesController extends BaseController{
 	
 	@PostMapping("/save")
 	@Traceable
-	public ResponseEntity<Object> save(@RequestBody SuperHeroe superHeroe) {
+	public ResponseEntity<Object> save(@Valid @RequestBody SuperHeroe superHeroe) {
 	   superHeroeService.save(superHeroe);
 	   return new ResponseEntity<>(HttpStatus.CREATED);
 	}

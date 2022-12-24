@@ -17,7 +17,7 @@
 <br>
 
 ###### Test de integración.
->Se crearon 6 Test, se pueden ver en SuperheroesApplicationTests.
+>Se crearon 7 Test, se pueden ver en SuperheroesApplicationTests.
 <br>
 
 ###### Presentar la aplicación dockerizada.
@@ -42,6 +42,7 @@
 * Maven
 * Profiles
 * Lombok
+* Spring-Validation
 
 <br><br>
 ###### Swagger

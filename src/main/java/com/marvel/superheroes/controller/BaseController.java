@@ -3,7 +3,6 @@ package com.marvel.superheroes.controller;
 import java.security.InvalidParameterException;
 import java.util.Map;
 
-import javax.security.auth.login.LoginException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -36,7 +35,7 @@ public class BaseController {
 
 
 	@ExceptionHandler(UserValidation.class)
-	public ResponseEntity<?> handleLoginException(LoginException exception, HttpServletRequest request) {
+	public ResponseEntity<?> handleLoginException(UserValidation exception, HttpServletRequest request) {
 		return handleBasicBusinessException(exception, request, HttpStatus.UNAUTHORIZED);
 	}
 

@@ -1,8 +1,11 @@
 package com.marvel.superheroes.controller.usuario;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  *
  */
 @RestController
+@Validated
 @Tag(name = "Usuarios", description = "Funcionalidad para obtener el token")
 public class UsuarioController extends BaseController {
 	
@@ -31,7 +35,7 @@ public class UsuarioController extends BaseController {
 	
 	@PostMapping("/getToken")
 	@Traceable
-	public ResponseEntity<Token> getToken(@RequestBody Usuario user) throws UserValidation {
+	public ResponseEntity<Token> getToken(@Valid @RequestBody Usuario user) throws UserValidation {
 		return new ResponseEntity<>(usuarioService.validate(user), HttpStatus.OK);
 	}
 	

@@ -1,5 +1,8 @@
 package com.marvel.superheroes.bean;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 import com.marvel.superheroes.model.SuperHeroeModel;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +18,10 @@ import lombok.Data;
 public class SuperHeroe {
 	
 	private Long id;
+	@NotEmpty
 	private String name;
+	@NotEmpty
+	@Min(1)
 	private Integer age;
 	
 	
