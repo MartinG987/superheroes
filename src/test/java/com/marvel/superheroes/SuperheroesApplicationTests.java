@@ -14,6 +14,11 @@ import org.springframework.test.context.ActiveProfiles;
 import com.marvel.superheroes.model.SuperHeroeModel;
 import com.marvel.superheroes.repository.SuperHeroeRepository;
 
+/**
+ * Test Unitarios de CRUD Superheroes
+ * @author Tincho
+ *
+ */
 @SpringBootTest
 @ActiveProfiles("dev")
 class SuperheroesApplicationTests {
