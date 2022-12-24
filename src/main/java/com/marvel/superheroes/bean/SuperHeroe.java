@@ -2,6 +2,7 @@ package com.marvel.superheroes.bean;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.marvel.superheroes.model.SuperHeroeModel;
 
@@ -19,6 +20,7 @@ public class SuperHeroe {
 	
 	private Long id;
 	@NotEmpty
+	@Size(min=3,max=500)
 	private String name;
 	@NotEmpty
 	@Min(1)
