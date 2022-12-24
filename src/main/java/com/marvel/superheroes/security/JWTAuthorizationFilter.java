@@ -1,6 +1,5 @@
 package com.marvel.superheroes.security;
 
-
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,19 +23,23 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 /**
  * Filtro basico para seguridad JWT
+ * 
  * @author Tincho
  *
  */
-@Component
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
-	private  String HEADER = "Authorization";
-	private  String PREFIX = "Bearer ";
-	private  String SECRET = "mySecretKey";
-	
+	private String HEADER = "Authorization";
+	private String PREFIX = "Bearer ";
+	private String SECRET = "";
+
+	public JWTAuthorizationFilter(String secret) {
+		this.SECRET = secret;
+	}
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+			throws ServletException, IOException {
 		try {
 			if (existeJWTToken(request, response)) {
 				Claims claims = validateToken(request);
@@ -46,33 +49,34 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 					SecurityContextHolder.clearContext();
 				}
 			} else {
-						SecurityContextHolder.clearContext();
+				SecurityContextHolder.clearContext();
 			}
 			chain.doFilter(request, response);
-			
+
 		} catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException e) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
 			return;
 		}
-	}	
-
-	
-	private Claims validateToken(HttpServletRequest request) {
-		return Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(request.getHeader(HEADER).replace(PREFIX, "")).getBody();
 	}
-	
+
+	private Claims validateToken(HttpServletRequest request) {
+		return Jwts.parser().setSigningKey(SECRET.getBytes())
+				.parseClaimsJws(request.getHeader(HEADER).replace(PREFIX, "")).getBody();
+	}
+
 	private void setUpSpringAuthentication(Claims claims) {
 		SecurityContextHolder.getContext().setAuthentication(getAuth(claims));
 	}
 
 	private UsernamePasswordAuthenticationToken getAuth(Claims claims) {
-		return  new UsernamePasswordAuthenticationToken(claims.getSubject(), null,
-				((List<String>)claims.get("authorities")).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+		return new UsernamePasswordAuthenticationToken(claims.getSubject(), null,
+				((List<String>) claims.get("authorities")).stream().map(SimpleGrantedAuthority::new)
+						.collect(Collectors.toList()));
 	}
 
 	private boolean existeJWTToken(HttpServletRequest request, HttpServletResponse res) {
-		return  ( request.getHeader(HEADER) == null || ! request.getHeader(HEADER).startsWith(PREFIX)) ? false : true;
+		return (request.getHeader(HEADER) == null || !request.getHeader(HEADER).startsWith(PREFIX)) ? false : true;
 	}
 
 }
