@@ -16,12 +16,10 @@ import com.marvel.superheroes.model.SuperHeroeModel;
 @Repository
 public interface SuperHeroeRepository  extends JpaRepository<SuperHeroeModel,Long>  {
 
-	
 	Optional<SuperHeroeModel> findById(Long id);
 	
 	List<SuperHeroeModel> findByName(String name);
 	
 	List<SuperHeroeModel> findByNameContaining(String name);
-	
 	
 }

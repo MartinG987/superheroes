@@ -12,6 +12,5 @@ public class UserValidation extends Exception {
 	public UserValidation(String msj) {
 		super(msj);
 	}
-
 	
 }

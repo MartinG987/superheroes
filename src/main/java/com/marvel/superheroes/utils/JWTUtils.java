@@ -17,26 +17,29 @@ import io.jsonwebtoken.SignatureAlgorithm;
  */
 public class JWTUtils {
 
-	public static String getJWTToken(String username) {
-		String secretKey = "mySecretKey";
-		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-				.commaSeparatedStringToAuthorityList("ROLE_USER");
-		
-		String token = Jwts
+	
+	public static String getJWTToken(String username, String secret) {
+		return "Bearer " + getToken(username, secret);
+	}
+
+	
+	private static List<GrantedAuthority> getGranted() {
+		return  AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+	}
+	
+	
+	private static String getToken(String username, String secret) {
+		return Jwts
 				.builder()
 				.setId("marvelJWT")
 				.setSubject(username)
 				.claim("authorities",
-						grantedAuthorities.stream()
+						getGranted().stream()
 								.map(GrantedAuthority::getAuthority)
 								.collect(Collectors.toList()))
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + 600000))
-				.signWith(SignatureAlgorithm.HS512,
-						secretKey.getBytes()).compact();
-
-		return "Bearer " + token;
+				.signWith(SignatureAlgorithm.HS512,secret.getBytes()).compact();
 	}
-	
 	
 }

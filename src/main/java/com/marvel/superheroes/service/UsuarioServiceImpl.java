@@ -16,11 +16,16 @@ import com.marvel.superheroes.utils.JWTUtils;
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
-	@Value("${user_api}")
+	@Value("${api.user}")
 	private String user;
 
-	@Value("${password_api}")
+	@Value("${api.password}")
 	private String password;
+	
+	@Value("${jwt.secret}")
+	private String secret;
+	
+	
 	
 	@Override
 	public Token validate(Usuario user) throws UserValidation {
@@ -36,7 +41,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 
 	private Token generateToken(Usuario user) {
-		return new Token(JWTUtils.getJWTToken(user.getUsername()));
+		return new Token(JWTUtils.getJWTToken(user.getUsername(),secret));
 	}
 
 }

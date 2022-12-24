@@ -23,8 +23,13 @@ public class TraceableAspect {
 		long start = System.currentTimeMillis();
         Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-        log.info("Log Duracion ==>> "+ joinPoint.getSignature() + "  - Demora en Ejecutar : " + executionTime + "ms");
+        logear(joinPoint, executionTime);
         return proceed;
+	}
+
+	
+	private void logear(ProceedingJoinPoint joinPoint, long executionTime) {
+		log.info("Log Duracion ==>> "+ joinPoint.getSignature() + "  - Demora en Ejecutar : " + executionTime + "ms");
 	}
 	
 	
