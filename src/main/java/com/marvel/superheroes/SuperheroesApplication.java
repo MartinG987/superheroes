@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Main Class & Configuracion de Seguridad
+ * Main Class Spring Boot
  * @author Tincho
  *
  */

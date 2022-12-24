@@ -28,6 +28,7 @@ public class UsuarioController extends BaseController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	
 	@PostMapping("/getToken")
 	@Traceable
 	public ResponseEntity<Token> getToken(@RequestBody Usuario user) throws UserValidation {
