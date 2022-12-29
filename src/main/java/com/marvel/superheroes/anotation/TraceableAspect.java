@@ -34,13 +34,11 @@ public class TraceableAspect {
 
 
 	private String getInfoLog(ProceedingJoinPoint joinPoint, long executionTime) {
-		var info = new StringBuilder();
-		info.append("Log Duracion ==>> ");
-		info.append(joinPoint.getSignature());
-		info.append(" - Demora en Ejecutar : ");
-		info.append(executionTime);
-		info.append(" ms ");
-		return info.toString();
+		return new StringBuilder().append("Log Duracion ==>> ")
+								  .append(joinPoint.getSignature())
+				                  .append(" - Demora en Ejecutar : ")
+				                  .append(executionTime)
+				                  .append(" ms ").toString();
 	}
 	
 	

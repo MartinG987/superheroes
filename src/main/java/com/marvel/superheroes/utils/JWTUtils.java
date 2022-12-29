@@ -19,10 +19,9 @@ public class JWTUtils {
 
 	
 	public static String getJWTToken(String username, String secret) {
-		var tokenComplete = new StringBuilder();
-		tokenComplete.append("Bearer ");
-		tokenComplete.append(getTokenJwt(username, secret));
-		return tokenComplete.toString();
+		return new StringBuilder()
+								.append("Bearer ")		
+								.append(getTokenJwt(username, secret)).toString();
 	}
 
 	
