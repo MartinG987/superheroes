@@ -22,7 +22,6 @@ public class SuperHeroe {
 	@NotEmpty
 	@Size(min=3,max=500)
 	private String name;
-	@NotEmpty
 	@Min(1)
 	private Integer age;
 	
