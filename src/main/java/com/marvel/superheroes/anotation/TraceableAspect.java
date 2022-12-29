@@ -20,16 +20,27 @@ public class TraceableAspect {
 	
 	@Around("@annotation(Traceable)")
 	public Object trace(ProceedingJoinPoint joinPoint) throws Throwable {
-		long start = System.currentTimeMillis();
-        Object proceed = joinPoint.proceed();
-        long executionTime = System.currentTimeMillis() - start;
+		var start = System.currentTimeMillis();
+        var proceed = joinPoint.proceed();
+        var executionTime = System.currentTimeMillis() - start;
         logear(joinPoint, executionTime);
         return proceed;
 	}
 
 	
 	private void logear(ProceedingJoinPoint joinPoint, long executionTime) {
-		log.info("Log Duracion ==>> "+ joinPoint.getSignature() + "  - Demora en Ejecutar : " + executionTime + "ms");
+		log.info(getInfoLog(joinPoint, executionTime));
+	}
+
+
+	private String getInfoLog(ProceedingJoinPoint joinPoint, long executionTime) {
+		var info = new StringBuilder();
+		info.append("Log Duracion ==>> ");
+		info.append(joinPoint.getSignature());
+		info.append(" - Demora en Ejecutar : ");
+		info.append(executionTime);
+		info.append(" ms ");
+		return info.toString();
 	}
 	
 	

@@ -3,6 +3,8 @@ package com.marvel.superheroes.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -34,7 +36,7 @@ public class SuperHeroeServiceImpl implements SuperHeroeService{
 
 	@Override
 	public SuperHeroe findById(Long id) {
-		return new SuperHeroe(superHeroeRepository.findById(id).get());
+		return new SuperHeroe(superHeroeRepository.findById(id).orElseThrow(()-> new EntityNotFoundException()));
 	}
 
 	

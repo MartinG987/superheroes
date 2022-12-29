@@ -24,7 +24,7 @@ public class DefaultExceptionAttributes implements ExceptionAttributes {
 	public Map<String, Object> getExceptionAttributes(Exception exception, HttpServletRequest httpRequest,
 			HttpStatus httpStatus) {
 
-		Map<String, Object> exceptionAttributes = new LinkedHashMap<String, Object>();
+		var exceptionAttributes = new LinkedHashMap<String, Object>();
 		exceptionAttributes.put(TIMESTAMP, new Date());
 		addHttpStatus(exceptionAttributes, httpStatus);
 		addExceptionDetail(exceptionAttributes, exception);

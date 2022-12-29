@@ -19,7 +19,10 @@ public class JWTUtils {
 
 	
 	public static String getJWTToken(String username, String secret) {
-		return "Bearer " + getToken(username, secret);
+		var tokenComplete = new StringBuilder();
+		tokenComplete.append("Bearer ");
+		tokenComplete.append(getTokenJwt(username, secret));
+		return tokenComplete.toString();
 	}
 
 	
@@ -28,7 +31,7 @@ public class JWTUtils {
 	}
 	
 	
-	private static String getToken(String username, String secret) {
+	private static String getTokenJwt(String username, String secret) {
 		return Jwts
 				.builder()
 				.setId("marvelJWT")

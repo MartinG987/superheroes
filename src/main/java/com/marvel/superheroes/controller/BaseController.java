@@ -27,8 +27,8 @@ public class BaseController {
 	private ResponseEntity<?> handleBasicBusinessException(Exception exception, HttpServletRequest request,	HttpStatus httpStatus) {
 		log.error("> handle" + exception.getClass().getName());
 		log.error("- Exception: ", exception);
-		ExceptionAttributes exceptionAttributes = new DefaultExceptionAttributes();
-		Map<String, Object> responseBody = exceptionAttributes.getExceptionAttributes(exception, request, httpStatus);
+		var exceptionAttributes = new DefaultExceptionAttributes();
+		var responseBody = exceptionAttributes.getExceptionAttributes(exception, request, httpStatus);
 		log.error("< handle" + exception.getClass().getName());
 		return new ResponseEntity<>(responseBody, httpStatus);
 	}

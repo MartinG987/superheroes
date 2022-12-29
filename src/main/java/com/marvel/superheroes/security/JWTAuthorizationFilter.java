@@ -41,7 +41,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		try {
 			if (existeJWTToken(request, response)) {
-				Claims claims = validateToken(request);
+				var claims = validateToken(request);
 				if (claims.get("authorities") != null) {
 					setUpSpringAuthentication(claims);
 				} else {
