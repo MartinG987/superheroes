@@ -17,7 +17,7 @@
 <br>
 
 ###### Test de integración.
->Se crearon 7 Test, se pueden ver en SuperheroesApplicationTests.
+>Se crearon 11 Test, se pueden ver en SuperheroesApplicationTests.
 <br>
 
 ###### Presentar la aplicación dockerizada.
